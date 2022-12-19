@@ -9,6 +9,7 @@ const morgan = require('morgan')
 // import Router
 const authRoute = require('./routes/authRoute')
 const productRoute = require('./routes/productRoute')
+const blogRoute = require('./routes/blogRoute')
 
 const dotenv = require('dotenv').config()
 
@@ -26,6 +27,7 @@ dbConnect()
 // Routes
 app.use('/api/v1/user', authRoute)
 app.use('/api/v1/product', productRoute)
+app.use('/api/v1/blog', blogRoute)
 
 const PORT = process.env.PORT || 4000
 
