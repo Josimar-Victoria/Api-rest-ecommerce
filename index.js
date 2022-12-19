@@ -11,6 +11,8 @@ const authRoute = require('./routes/authRoute')
 const productRoute = require('./routes/productRoute')
 const blogRoute = require('./routes/blogRoute')
 const prodcategoryRoute = require('./routes/prodcategoryRoute')
+const blogcategoryRouter = require('./routes/blogCatRoute')
+const brandRouter = require("./routes/brandRoute");
 
 const dotenv = require('dotenv').config()
 
@@ -30,6 +32,8 @@ app.use('/api/v1/user', authRoute)
 app.use('/api/v1/product', productRoute)
 app.use('/api/v1/blog', blogRoute)
 app.use('/api/v1/category', prodcategoryRoute)
+app.use('/api/v1/blogcategory', blogcategoryRouter)
+app.use("/api/v1/brand", brandRouter);
 
 const PORT = process.env.PORT || 4000
 
