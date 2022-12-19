@@ -11,7 +11,10 @@ const {
   blockUser,
   unblockUser,
   handleRefreshToken,
-  logout
+  logout,
+  updatePassword,
+  forgotPasswordToken,
+  resetPassword
 } = require('../controller/userCtrl')
 
 // Crear Un Usuario  ----------------------------------------------
@@ -43,5 +46,14 @@ router.put('/block-user/:id', authMiddleware, isAdmin, blockUser)
 
 // Desbloquear usuario ------------------------------
 router.put('/unblock-user/:id', authMiddleware, isAdmin, unblockUser)
+
+// Actualiza contraseña ------------------------------
+router.put('/password', authMiddleware, updatePassword)
+
+// Olvidé el token de contraseña ----------------------------
+router.post('/forgot-password-token', forgotPasswordToken)
+
+// Restablecer la contraseña ----------------------------------------------
+router.put('/reset-password/:token', resetPassword)
 
 module.exports = router
