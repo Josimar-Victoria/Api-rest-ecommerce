@@ -6,13 +6,24 @@ const {
   getAllBlogs,
   deleteBlogs,
   liketheBlog,
-  disliketheBlog
+  disliketheBlog,
+  uploadImages
 } = require('../controller/blogCtrl')
 const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware')
+const { uploadPhoto, blogImgResize } = require('../middlewares/uploadImage')
 const router = express.Router()
 
 //  me gusta el blog ------------------------------
 router.put('/likes', authMiddleware, liketheBlog)
+
+router.put(
+  "/upload/:id",
+  authMiddleware,
+  isAdmin,
+  uploadPhoto.array("images", 2),
+  blogImgResize,
+  uploadImages
+);
 
 // no me gusta el blog  ------------------------------
 router.put('/dislikes', authMiddleware, disliketheBlog)
