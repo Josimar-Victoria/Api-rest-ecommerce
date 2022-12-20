@@ -18,6 +18,8 @@ router.get('/', getAllProduct)
 
 router.put(
   "/upload/:id",
+  authMiddleware,
+  isAdmin,
   uploadPhoto.array("images", 10),
   productImgResize,
   uploadImages
