@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const { default: mongoose } = require('mongoose')
 const { notFound, errorHandler } = require('./middlewares/errorHandler')
 const morgan = require('morgan')
+const cors = require('cors')
 
 // import Router
 const authRoute = require('./routes/authRoute')
@@ -12,10 +13,14 @@ const productRoute = require('./routes/productRoute')
 const blogRoute = require('./routes/blogRoute')
 const prodcategoryRoute = require('./routes/prodcategoryRoute')
 const blogcategoryRouter = require('./routes/blogCatRoute')
-const brandRouter = require("./routes/brandRoute");
-const couponRouter = require("./routes/couponRoute");
+const brandRouter = require('./routes/brandRoute')
+const couponRouter = require('./routes/couponRoute')
 
 const dotenv = require('dotenv').config()
+
+// Connection database MogoDB
+mongoose.set('strictQuery', false)
+dbConnect()
 
 const app = express()
 
@@ -23,10 +28,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-
-// Connection database MogoDB
-mongoose.set('strictQuery', false)
-dbConnect()
+app.use(cors())
 
 // Routes
 app.use('/api/v1/user', authRoute)
@@ -34,8 +36,8 @@ app.use('/api/v1/product', productRoute)
 app.use('/api/v1/blog', blogRoute)
 app.use('/api/v1/category', prodcategoryRoute)
 app.use('/api/v1/blogcategory', blogcategoryRouter)
-app.use("/api/v1/brand", brandRouter);
-app.use("/api/v1/coupon", couponRouter);
+app.use('/api/v1/brand', brandRouter)
+app.use('/api/v1/coupon', couponRouter)
 
 const PORT = process.env.PORT || 4000
 
