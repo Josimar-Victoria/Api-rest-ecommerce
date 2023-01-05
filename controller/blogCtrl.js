@@ -2,7 +2,7 @@ const Blog = require('../models/blogModel')
 const User = require('../models/userModel')
 const asyncHandler = require('express-async-handler')
 const validateMongoDbId = require('../utils/validateMongoDbId')
-const fs = require("fs");
+const fs = require('fs')
 
 // Craete un Blog  ------------------------------
 const createBlog = asyncHandler(async (req, res) => {
@@ -63,7 +63,7 @@ const getBlog = asyncHandler(async (req, res) => {
 const getAllBlogs = asyncHandler(async (req, res) => {
   try {
     const getBlogs = await Blog.find()
-    res.json({ msg: 'successfully', getBlogs })
+    res.json(getBlogs)
   } catch (error) {
     throw new Error(error)
   }
